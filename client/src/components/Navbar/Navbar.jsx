@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Menu, X, BadgePlus, Sun, Moon } from "lucide-react";
+import { DialogBox } from "../DialogBox/DialogBox.jsx";
+import { Toaster, toast } from "sonner";
+
 
 export function Navbar() {
   const [theme, setTheme] = useState("dark");
+
+  const [showComponent, setShowComponent] = useState(false);
+
+  const toggleComponent = () => {
+    setShowComponent(!showComponent);
+  };
 
   const changeTheme = () => {
     setTheme(theme == "light" ? "dark" : "light");
@@ -25,16 +34,20 @@ export function Navbar() {
           <span className="font-bold text-black dark:text-white text-3xl">All Todos</span>
         </div>
         <div className="flex items-center justify-center gap-4">
+      <Toaster richColors />
+
           <button onClick={changeTheme}>
             {theme === "light" ? <Moon /> : <Sun color="#fff" />}
           </button>
           <button
             type="button"
             className="rounded-md dark:bg-[#121212] px-3 py-2 text-sm font-semibold text-black dark:text-white shadow-sm flex items-center gap-2 border-slate-950 dark:border-white border-2 "
+            onClick={toggleComponent}
           >
             <BadgePlus />
             Create New
           </button>
+          {showComponent && <DialogBox />}
         </div>
       </div>
     </div>

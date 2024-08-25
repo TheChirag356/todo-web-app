@@ -16,7 +16,6 @@ function DialogBox() {
     {
       (e) => setInput(e.target.value);
     }
-    console.log(input);
     if (input.trim() === "") {
       toast.error("Please enter a task", {
         position: "bottom-right",
