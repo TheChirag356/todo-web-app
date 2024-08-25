@@ -4,12 +4,12 @@ import { Inbox, Plus } from "lucide-react";
 
 function Hero() {
     const [task, setTask] = useState([
-        {
-            id: 1,
-            title: "Create a New Task",
-            date: "Tue Jun 01 2021",
-            completed: false,
-        },
+        // {
+        //     id: 1,
+        //     title: "Create a New Task",
+        //     date: "Tue Jun 01 2021",
+        //     completed: false,
+        // },
     ]);
 
     function createNewTask(title) {
@@ -30,18 +30,19 @@ function Hero() {
     return (
         <div className="dark:bg-[#121212] min-h-screen relative flex items-center justify-center">
             {task.length === 0 ? (
-                <div className="flex flex-col items-center">
-                    {theme === "dark" ? <Inbox color="#fff" /> : <Inbox />}
+                <div className="flex flex-col items-center gap-4">
+                    {theme === "dark" ? <Inbox color="#fff" size={130} strokeWidth={1.5} /> : <Inbox />}
                     <div className="dark:text-white text-black text-center">
-                        <h2>No Todos Found</h2>
-                        <h4>
+                        <h2 className="font-bold text-6xl pb-4">No Todos Found?</h2>
+                        <h4 className="font-medium max-w-md px-3 ">
                             No todo has been added yet. Click the button below
                             to create a new task.
                         </h4>
                     </div>
                     <button
                         type="button"
-                        className="rounded-md dark:bg-[#ae7aff] bg-[#ae7aff] px-3 py-2 text-sm font-semibold text-[#121212] shadow-sm hover:opacity-90">
+                        className="rounded-md dark:bg-[#ae7aff] bg-[#ae7aff] px-3 py-2 text-sm font-semibold text-[#121212] shadow-sm hover:opacity-90"
+                        >
                         Create a New Task
                     </button>
                 </div>
