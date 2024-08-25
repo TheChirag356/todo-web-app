@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Inbox, Trash2 } from "lucide-react";
+import { Toaster, toast } from "sonner";
 import { DialogBox } from "../DialogBox/DialogBox.jsx";
 
 function Hero() {
@@ -41,12 +42,13 @@ function Hero() {
 
   return (
     <div className="dark:bg-[#121212] min-h-screen relative flex items-center justify-center">
+      <Toaster richColors />
       {task.length === 0 ? (
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4 text-black dark:text-white">
           {theme === "dark" ? (
-            <Inbox color="#fff" size={130} strokeWidth={1.5} />
+            <Inbox size={130} strokeWidth={1.5} />
           ) : (
-            <Inbox />
+            <Inbox size={130} strokeWidth={1.5} />
           )}
           <div className="dark:text-white text-black text-center">
             <h2 className="font-bold text-6xl pb-4">No Todos Found?</h2>

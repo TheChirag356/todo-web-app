@@ -22,7 +22,7 @@ export function Navbar() {
     <div className="absolute w-full bg-white dark:bg-[#121212] border-b-2 z-50">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <div className="inline-flex items-center space-x-2">
-          <span className="font-bold text-white text-3xl">All Todos</span>
+          <span className="font-bold text-black dark:text-white text-3xl">All Todos</span>
         </div>
         <div className="flex items-center justify-center gap-4">
           <button onClick={changeTheme}>
@@ -30,7 +30,7 @@ export function Navbar() {
           </button>
           <button
             type="button"
-            className="rounded-md dark:bg-[#121212] px-3 py-2 text-sm font-semibold text-white shadow-sm flex items-center gap-2 border-white border-2 "
+            className="rounded-md dark:bg-[#121212] px-3 py-2 text-sm font-semibold text-black dark:text-white shadow-sm flex items-center gap-2 border-slate-950 dark:border-white border-2 "
           >
             <BadgePlus />
             Create New
