@@ -5,18 +5,48 @@ import { DialogBox } from "../DialogBox/DialogBox.jsx";
 
 function Hero() {
   const [task, setTask] = useState([
-    // {
-    //   id: 1,
-    //   title: "Task 1",
-    //   date: "Tue Jun 01 2021",
-    //   completed: false,
-    // },
-    // {
-    //   id: 1,
-    //   title: "Task 1",
-    //   date: "Tue Jun 01 2021",
-    //   completed: true,
-    // },
+    {
+      id: 1,
+      title: "Task 1",
+      date: "Tue Jun 01 2021",
+      completed: false,
+    },
+    {
+      id: 1,
+      title: "Task 1",
+      date: "Tue Jun 01 2021",
+      completed: true,
+    },
+    {
+      id: 1,
+      title: "Task 1",
+      date: "Tue Jun 01 2021",
+      completed: true,
+    },
+    {
+      id: 1,
+      title: "Task 1",
+      date: "Tue Jun 01 2021",
+      completed: true,
+    },
+    {
+      id: 1,
+      title: "Task 1",
+      date: "Tue Jun 01 2021",
+      completed: true,
+    },
+    {
+      id: 1,
+      title: "Task 1",
+      date: "Tue Jun 01 2021",
+      completed: true,
+    },
+    {
+      id: 1,
+      title: "Task 1",
+      date: "Tue Jun 01 2021",
+      completed: true,
+    },
   ]);
 
   const [showComponent, setShowComponent] = useState(false);
@@ -41,7 +71,7 @@ function Hero() {
   const theme = sessionStorage.getItem("theme");
 
   return (
-    <div className="dark:bg-[#121212] min-h-screen relative flex items-center justify-center">
+    <div className=" dark:bg-[#121212] bg-white min-h-screen relative flex items-center justify-center">
       <Toaster richColors />
       {task.length === 0 ? (
         <div className="flex flex-col items-center gap-4 text-black dark:text-white">
@@ -77,43 +107,60 @@ function Hero() {
               </button>
             ))}
           </div>
-          <div className="w-full flex flex-col items-center">
-            {task.map((item, index) => {
-              return (
-                <div
+          <div className="flex flex-col items-center w-full max-w-6xl px-4 gap-2 min-h-screen">
+            <div className="mb-4 flex flex-wrap justify-center max-w-2xl mt-[20vh]">
+              {view.map((item, index) => (
+                <button
                   key={index}
-                  className="flex items-center justify-between max-w-4xl w-full px-4 py-3 dark:bg-[#212121] bg-[#f0f0f0] dark:text-white text-slate-950 shadow-sm rounded-md mb-2">
-                  <div>
-                    <h3 className="font-semibold text-lg">
-                      {item.completed ? (
-                        <strike> {item.title} </strike>
-                      ) : (
-                        item.title
-                      )}
-                    </h3>
-                    <p className="text-sm font-medium">{item.date}</p>
-                  </div>
-                  <div className="max-w-2xl">
-                    <div className="flex flex-row-reverse justify-evenly">
-                      <button
-                        type="button"
-                        className="rounded-md px-3 py-2 text-sm font-semibold shadow-sm hover:opacity-90">
-                        <Trash2 color="#ffffff" strokeWidth={1.5} />
-                      </button>
+                  type="button"
+                  className="rounded-md px-3 py-2 text-sm font-semibold dark:bg-[#212121] bg-[#f0f0f0] dark:text-white text-slate-950 dark:hover:bg-[#2a2a2a] hover:bg-[#e0e0e0] shadow-sm mr-2 mb-2">
+                  {item}
+                </button>
+              ))}
+            </div>
+
+            {/* Todos Start here */}
+            <div className="flex flex-col items-center w-full max-w-6xl px-4 gap-2 min-h-screen">
+              <div className="w-full flex flex-col items-center">
+                <div className="w-full max-w-4xl">
+                  {task.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between w-full px-4 py-3 dark:bg-[#212121] bg-[#f0f0f0] dark:text-white text-slate-950 shadow-sm rounded-md mb-2">
+                      <div>
+                        <h3 className="font-semibold text-lg">
+                          {item.completed ? (
+                            <strike> {item.title} </strike>
+                          ) : (
+                            item.title
+                          )}
+                        </h3>
+                        <p className="text-sm font-medium">{item.date}</p>
+                      </div>
+                      <div className="max-w-2xl">
+                        <div className="flex flex-row-reverse justify-evenly">
+                          <button
+                            type="button"
+                            className="rounded-md px-3 py-2 text-sm font-semibold shadow-sm hover:opacity-90">
+                            <Trash2 color="#ffffff" strokeWidth={1.5} />
+                          </button>
+                        </div>
+                        <div>
+                          <button
+                            type="button"
+                            className="rounded-md px-3 py-2 text-sm font-semibold dark:bg-[#ae7aff] bg-[#ae7aff] dark:text-[#121212] shadow-sm hover:opacity-90">
+                            {item.completed
+                              ? "Mark as Pending"
+                              : "Mark as Completed"}
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <button
-                        type="button"
-                        className="rounded-md px-3 py-2 text-sm font-semibold dark:bg-[#ae7aff] bg-[#ae7aff] dark:text-[#121212] shadow-sm hover:opacity-90">
-                        {item.completed
-                          ? "Mark as Pending"
-                          : "Mark as Completed"}
-                      </button>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              );
-            })}
+              </div>
+            </div>
+            {/* todos end here */}
           </div>
         </div>
       )}
