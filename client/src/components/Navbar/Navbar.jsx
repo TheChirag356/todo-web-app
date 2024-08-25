@@ -3,7 +3,7 @@ import { Menu, X, BadgePlus, Sun, Moon } from "lucide-react";
 import { DialogBox } from "../DialogBox/DialogBox.jsx";
 import { Toaster, toast } from "sonner";
 
-export function Navbar() {
+export function Navbar({ onCreateTask }) {
   const [theme, setTheme] = useState("dark");
 
   const [showComponent, setShowComponent] = useState(false);
@@ -24,7 +24,7 @@ export function Navbar() {
       sessionStorage.setItem("theme", "light");
       document.querySelector("html").classList.remove("dark");
     }
-  });
+  }, [theme]);
 
   return (
     <div className="fixed top-0 left-0 right-0 w-full bg-white/30 dark:bg-[#121212]/30 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-50">
@@ -45,7 +45,12 @@ export function Navbar() {
             <BadgePlus />
             Create New
           </button>
-          {showComponent && <DialogBox />}
+          {showComponent && (
+            <DialogBox
+              onCreateTask={onCreateTask}
+              onClose={() => setShowComponent(false)}
+            />
+          )}
         </div>
       </div>
     </div>

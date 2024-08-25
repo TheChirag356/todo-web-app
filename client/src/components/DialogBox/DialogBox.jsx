@@ -7,14 +7,11 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 
-function DialogBox() {
+function DialogBox({ onCreateTask, onClose }) {
   const [open, setOpen] = useState(true);
   const [input, setInput] = useState("");
 
   function onConfirm() {
-    {
-      (e) => setInput(e.target.value);
-    }
     if (input.trim() === "") {
       toast.error("Please enter a task", {
         position: "bottom-right",
@@ -22,13 +19,21 @@ function DialogBox() {
       });
       return;
     } else {
+      onCreateTask(input.trim());
       toast.success("Task added successfully");
     }
     setOpen(false);
+    onClose();
   }
 
   return (
-    <Dialog open={open} onClose={setOpen} className="relative z-10">
+    <Dialog
+      open={open}
+      onClose={() => {
+        setOpen(false);
+        onClose();
+      }}
+      className="relative z-10">
       <Toaster richColors />
       <DialogBackdrop
         transition
@@ -46,7 +51,7 @@ function DialogBox() {
                   <DialogTitle
                     as="h3"
                     className="text-base font-semibold leading-6 text-black dark:text-white">
-                    Enter your first Task
+                    Enter your Task
                   </DialogTitle>
                   <div title="inputtask" className="mt-2 w-full">
                     <input
@@ -64,7 +69,7 @@ function DialogBox() {
               <button
                 title="Confirmbtn"
                 type="button"
-                onClick={() => onConfirm()}
+                onClick={onConfirm}
                 className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">
                 Confirm
               </button>
@@ -72,7 +77,10 @@ function DialogBox() {
                 title="Cancelbtn"
                 type="button"
                 data-autofocus
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  onClose();
+                }}
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">
                 Cancel
               </button>

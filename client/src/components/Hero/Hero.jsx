@@ -1,49 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import { Inbox, Trash2 } from "lucide-react";
 import { Toaster, toast } from "sonner";
 import { DialogBox } from "../DialogBox/DialogBox.jsx";
 
-function Hero() {
-  const [task, setTask] = useState([
-    // {
-    //   id: 1,
-    //   title: "Task 1",
-    //   date: "Tue Jun 01 2021",
-    //   completed: false,
-    // },
-    // {
-    //   id: 1,
-    //   title: "Task 1",
-    //   date: "Tue Jun 01 2021",
-    //   completed: true,
-    // },
-  ]);
-
-  const [showComponent, setShowComponent] = useState(false);
+function Hero({ tasks, setTasks }) {
+  const [showComponent, setShowComponent] = React.useState(false);
 
   const toggleComponent = () => {
     setShowComponent(!showComponent);
   };
 
-  function createNewTask(title) {
-    const currDate = new Date();
-    const newTask = {
-      id: Math.floor(Math.random() * 100),
-      title,
-      date: currDate.toDateString(),
-      completed: false,
-    };
-    setTask(newTask);
-  }
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+    toast.success("Task deleted successfully");
+  };
+
+  const toggleTaskCompletion = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+    toast.success("Task status updated");
+  };
 
   const view = ["All Todos", "Pending", "Completed"];
 
   const theme = sessionStorage.getItem("theme");
 
   return (
-    <div className=" dark:bg-[#121212] bg-white min-h-screen relative flex items-center justify-center">
+    <div className="dark:bg-[#121212] bg-white min-h-screen relative flex items-center justify-center">
       <Toaster richColors />
-      {task.length === 0 ? (
+      {tasks.length === 0 ? (
         <div className="flex flex-col items-center gap-4 text-black dark:text-white">
           {theme === "dark" ? (
             <Inbox size={130} strokeWidth={1.5} />
@@ -63,7 +51,22 @@ function Hero() {
             onClick={toggleComponent}>
             Create a New Task
           </button>
-          {showComponent && <DialogBox />}
+          {showComponent && (
+            <DialogBox
+              onCreateTask={(title) =>
+                setTasks([
+                  ...tasks,
+                  {
+                    id: Math.floor(Math.random() * 100),
+                    title,
+                    date: new Date().toDateString(),
+                    completed: false,
+                  },
+                ])
+              }
+              onClose={() => setShowComponent(false)}
+            />
+          )}
         </div>
       ) : (
         <div className="flex flex-col items-center w-full max-w-6xl px-4 gap-2">
@@ -83,9 +86,9 @@ function Hero() {
             <div className="flex flex-col items-center w-full max-w-6xl px-4 gap-2 min-h-screen">
               <div className="w-full flex flex-col items-center">
                 <div className="w-full max-w-4xl">
-                  {task.map((item, index) => (
+                  {tasks.map((item) => (
                     <div
-                      key={index}
+                      key={item.id}
                       className="flex items-center justify-between w-full px-4 py-3 dark:bg-[#212121] bg-[#f0f0f0] dark:text-white text-slate-950 shadow-sm rounded-md mb-2">
                       <div>
                         <h3 className="font-semibold text-lg">
@@ -101,6 +104,7 @@ function Hero() {
                         <div className="flex flex-row-reverse justify-evenly">
                           <button
                             type="button"
+                            onClick={() => deleteTask(item.id)}
                             className="rounded-md px-3 py-2 text-sm font-semibold shadow-sm hover:opacity-90">
                             <Trash2 color="#ffffff" strokeWidth={1.5} />
                           </button>
@@ -108,6 +112,7 @@ function Hero() {
                         <div>
                           <button
                             type="button"
+                            onClick={() => toggleTaskCompletion(item.id)}
                             className="rounded-md px-3 py-2 text-sm font-semibold dark:bg-[#ae7aff] bg-[#ae7aff] dark:text-[#121212] shadow-sm hover:opacity-90">
                             {item.completed
                               ? "Mark as Pending"
