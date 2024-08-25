@@ -24,6 +24,8 @@ function Hero({ tasks, setTasks }) {
     toast.success("Task status updated");
   };
 
+  const [tab, setTab] = React.useState("All Todos");
+
   const view = ["All Todos", "Pending", "Completed"];
 
   const theme = sessionStorage.getItem("theme");
@@ -76,7 +78,11 @@ function Hero({ tasks, setTasks }) {
                 <button
                   key={index}
                   type="button"
-                  className="rounded-md px-3 py-2 text-sm font-semibold dark:bg-[#212121] bg-[#f0f0f0] dark:text-white text-slate-950 dark:hover:bg-[#2a2a2a] hover:bg-[#e0e0e0] shadow-sm mr-2 mb-2">
+                  className="rounded-md px-3 py-2 text-sm font-semibold dark:bg-[#212121] bg-[#f0f0f0] dark:text-white text-slate-950 dark:hover:bg-[#2a2a2a] hover:bg-[#e0e0e0] shadow-sm mr-2 mb-2"
+                  onClick={() => {
+                    setTab(item);
+                    console.log(tab);
+                  }}>
                   {item}
                 </button>
               ))}
@@ -86,42 +92,134 @@ function Hero({ tasks, setTasks }) {
             <div className="flex flex-col items-center w-full max-w-6xl px-4 gap-2 min-h-screen">
               <div className="w-full flex flex-col items-center">
                 <div className="w-full max-w-4xl">
-                  {tasks.map((item) => (
-                    <div
-                      key={item.id}
-                      className="flex items-center justify-between w-full px-4 py-3 dark:bg-[#212121] bg-[#f0f0f0] dark:text-white text-slate-950 shadow-sm rounded-md mb-2">
-                      <div>
-                        <h3 className="font-semibold text-lg">
-                          {item.completed ? (
-                            <strike> {item.title} </strike>
-                          ) : (
-                            item.title
-                          )}
-                        </h3>
-                        <p className="text-sm font-medium">{item.date}</p>
-                      </div>
-                      <div className="max-w-2xl">
-                        <div className="flex flex-row-reverse justify-evenly">
-                          <button
-                            type="button"
-                            onClick={() => deleteTask(item.id)}
-                            className="rounded-md px-3 py-2 text-sm font-semibold shadow-sm hover:opacity-90 text">
-                            <Trash2 strokeWidth={1.5} />
-                          </button>
+                  {tab === "All Todos" && tasks.length > 0
+                    ? tasks.map((item) => (
+                        <div
+                          key={item.id}
+                          className="flex items-center justify-between w-full px-4 py-3 dark:bg-[#212121] bg-[#f0f0f0] dark:text-white text-slate-950 shadow-sm rounded-md mb-2">
+                          <div>
+                            <h3 className="font-semibold text-lg">
+                              {item.completed ? (
+                                <strike> {item.title} </strike>
+                              ) : (
+                                item.title
+                              )}
+                            </h3>
+                            <p className="text-sm font-medium">{item.date}</p>
+                          </div>
+                          <div className="max-w-2xl">
+                            <div className="flex flex-row-reverse justify-evenly">
+                              <button
+                                title="delete"
+                                type="button"
+                                onClick={() => deleteTask(item.id)}
+                                className="rounded-md px-3 py-2 text-sm font-semibold shadow-sm hover:opacity-90 text">
+                                <Trash2 strokeWidth={1.5} />
+                              </button>
+                            </div>
+                            <div>
+                              <button
+                                title="completion"
+                                type="button"
+                                onClick={() => toggleTaskCompletion(item.id)}
+                                className="rounded-md px-3 py-2 text-sm font-semibold dark:bg-[#ae7aff] bg-[#ae7aff] dark:text-[#121212] shadow-sm hover:opacity-90">
+                                {item.completed
+                                  ? "Mark as Pending"
+                                  : "Mark as Completed"}
+                              </button>
+                            </div>
+                          </div>
                         </div>
-                        <div>
-                          <button
-                            type="button"
-                            onClick={() => toggleTaskCompletion(item.id)}
-                            className="rounded-md px-3 py-2 text-sm font-semibold dark:bg-[#ae7aff] bg-[#ae7aff] dark:text-[#121212] shadow-sm hover:opacity-90">
-                            {item.completed
-                              ? "Mark as Pending"
-                              : "Mark as Completed"}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                      ))
+                    : tab === "Pending"
+                      ? tasks
+                          .filter((item) => !item.completed)
+                          .map((item) => (
+                            <div
+                              key={item.id}
+                              className="flex items-center justify-between w-full px-4 py-3 dark:bg-[#212121] bg-[#f0f0f0] dark:text-white text-slate-950 shadow-sm rounded-md mb-2">
+                              <div>
+                                <h3 className="font-semibold text-lg">
+                                  {item.completed ? (
+                                    <strike> {item.title} </strike>
+                                  ) : (
+                                    item.title
+                                  )}
+                                </h3>
+                                <p className="text-sm font-medium">
+                                  {item.date}
+                                </p>
+                              </div>
+                              <div className="max-w-2xl">
+                                <div className="flex flex-row-reverse justify-evenly">
+                                  <button
+                                    title="delete"
+                                    type="button"
+                                    onClick={() => deleteTask(item.id)}
+                                    className="rounded-md px-3 py-2 text-sm font-semibold shadow-sm hover:opacity-90 text">
+                                    <Trash2 strokeWidth={1.5} />
+                                  </button>
+                                </div>
+                                <div>
+                                  <button
+                                    title="completion"
+                                    type="button"
+                                    onClick={() =>
+                                      toggleTaskCompletion(item.id)
+                                    }
+                                    className="rounded-md px-3 py-2 text-sm font-semibold dark:bg-[#ae7aff] bg-[#ae7aff] dark:text-[#121212] shadow-sm hover:opacity-90">
+                                    {item.completed
+                                      ? "Mark as Pending"
+                                      : "Mark as Completed"}
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))
+                      : tasks
+                          .filter((item) => item.completed)
+                          .map((item) => (
+                            <div
+                              key={item.id}
+                              className="flex items-center justify-between w-full px-4 py-3 dark:bg-[#212121] bg-[#f0f0f0] dark:text-white text-slate-950 shadow-sm rounded-md mb-2">
+                              <div>
+                                <h3 className="font-semibold text-lg">
+                                  {item.completed ? (
+                                    <strike> {item.title} </strike>
+                                  ) : (
+                                    item.title
+                                  )}
+                                </h3>
+                                <p className="text-sm font-medium">
+                                  {item.date}
+                                </p>
+                              </div>
+                              <div className="max-w-2xl">
+                                <div className="flex flex-row-reverse justify-evenly">
+                                  <button
+                                    title="delete"
+                                    type="button"
+                                    onClick={() => deleteTask(item.id)}
+                                    className="rounded-md px-3 py-2 text-sm font-semibold shadow-sm hover:opacity-90 text">
+                                    <Trash2 strokeWidth={1.5} />
+                                  </button>
+                                </div>
+                                <div>
+                                  <button
+                                    title="completion"
+                                    type="button"
+                                    onClick={() =>
+                                      toggleTaskCompletion(item.id)
+                                    }
+                                    className="rounded-md px-3 py-2 text-sm font-semibold dark:bg-[#ae7aff] bg-[#ae7aff] dark:text-[#121212] shadow-sm hover:opacity-90">
+                                    {item.completed
+                                      ? "Mark as Pending"
+                                      : "Mark as Completed"}
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                 </div>
               </div>
             </div>
