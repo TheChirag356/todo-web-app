@@ -33,7 +33,7 @@ function DialogBox() {
       <Toaster richColors />
       <DialogBackdrop
         transition
-        className="fixed inset-0 dark:bg-[#00000097] bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
+        className="fixed inset-0 dark:bg-[#00000097] bg-gray-400 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
       />
 
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
@@ -61,7 +61,7 @@ function DialogBox() {
                 </div>
               </div>
             </div>
-            <div className="bg-[#121212] px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 ">
+            <div className="dark:bg-[#121212] px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 ">
               <button
                 title="Confirmbtn"
                 type="button"

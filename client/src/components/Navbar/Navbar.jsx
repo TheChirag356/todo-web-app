@@ -35,8 +35,6 @@ export function Navbar() {
           </span>
         </div>
         <div className="flex items-center justify-center gap-4">
-          <Toaster richColors />
-
           <button onClick={changeTheme}>
             {theme === "light" ? <Moon /> : <Sun color="#fff" />}
           </button>

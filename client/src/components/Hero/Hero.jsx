@@ -5,18 +5,18 @@ import { DialogBox } from "../DialogBox/DialogBox.jsx";
 
 function Hero() {
   const [task, setTask] = useState([
-    {
-      id: 1,
-      title: "Task 1",
-      date: "Tue Jun 01 2021",
-      completed: false,
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      date: "Tue Jun 01 2021",
-      completed: true,
-    },
+    // {
+    //   id: 1,
+    //   title: "Task 1",
+    //   date: "Tue Jun 01 2021",
+    //   completed: false,
+    // },
+    // {
+    //   id: 1,
+    //   title: "Task 1",
+    //   date: "Tue Jun 01 2021",
+    //   completed: true,
+    // },
   ]);
 
   const [showComponent, setShowComponent] = useState(false);
