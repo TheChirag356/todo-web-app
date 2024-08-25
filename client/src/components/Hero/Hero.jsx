@@ -105,8 +105,8 @@ function Hero({ tasks, setTasks }) {
                           <button
                             type="button"
                             onClick={() => deleteTask(item.id)}
-                            className="rounded-md px-3 py-2 text-sm font-semibold shadow-sm hover:opacity-90">
-                            <Trash2 color="#ffffff" strokeWidth={1.5} />
+                            className="rounded-md px-3 py-2 text-sm font-semibold shadow-sm hover:opacity-90 text">
+                            <Trash2 strokeWidth={1.5} />
                           </button>
                         </div>
                         <div>
