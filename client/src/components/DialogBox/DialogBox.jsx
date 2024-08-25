@@ -6,7 +6,6 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { SquareCheck } from "lucide-react";
 
 function DialogBox() {
   const [open, setOpen] = useState(true);
