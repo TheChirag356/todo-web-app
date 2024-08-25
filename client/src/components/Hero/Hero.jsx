@@ -17,36 +17,6 @@ function Hero() {
       date: "Tue Jun 01 2021",
       completed: true,
     },
-    {
-      id: 1,
-      title: "Task 1",
-      date: "Tue Jun 01 2021",
-      completed: true,
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      date: "Tue Jun 01 2021",
-      completed: true,
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      date: "Tue Jun 01 2021",
-      completed: true,
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      date: "Tue Jun 01 2021",
-      completed: true,
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      date: "Tue Jun 01 2021",
-      completed: true,
-    },
   ]);
 
   const [showComponent, setShowComponent] = useState(false);
@@ -97,16 +67,6 @@ function Hero() {
         </div>
       ) : (
         <div className="flex flex-col items-center w-full max-w-6xl px-4 gap-2">
-          <div className="mb-4 flex flex-wrap justify-center max-w-2xl">
-            {view.map((item, index) => (
-              <button
-                key={index}
-                type="button"
-                className="rounded-md px-3 py-2 text-sm font-semibold dark:bg-[#212121] bg-[#f0f0f0] dark:text-white text-slate-950 dark:hover:bg-[#2a2a2a] hover:bg-[#e0e0e0] shadow-sm mr-2 mb-2">
-                {item}
-              </button>
-            ))}
-          </div>
           <div className="flex flex-col items-center w-full max-w-6xl px-4 gap-2 min-h-screen">
             <div className="mb-4 flex flex-wrap justify-center max-w-2xl mt-[20vh]">
               {view.map((item, index) => (
